@@ -1,0 +1,297 @@
+/* ==========================================================================
+   تی‌رست (TREST) — استایل سراسری پروژه
+   Tailwind CSS v4 (CSS-first configuration)
+   ========================================================================== */
+
+@import "tailwindcss";
+@import "@fontsource-variable/vazirmatn";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+/* --------------------------------------------------------------------------
+   توکن‌های طراحی (معادل tailwind.config در نسخه تک‌فایلی)
+   -------------------------------------------------------------------------- */
+@theme {
+  --font-vazir: "Vazirmatn Variable", "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Vazirmatn Variable", "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+
+  --color-deep: #0b3a6e;
+  --color-primary: #1565a8;
+  --color-accent: #2f80c9;
+  --color-mist: #f5f8fc;
+  --color-ink: #142033;
+  --color-gold: #c9a86a;
+
+  --shadow-soft: 0 10px 40px -12px rgba(11, 58, 110, 0.18);
+  --shadow-card: 0 8px 30px -8px rgba(11, 58, 110, 0.12);
+  --shadow-pop: 0 20px 60px -15px rgba(11, 58, 110, 0.35);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  --radius-4xl: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   پایه
+   -------------------------------------------------------------------------- */
+@layer base {
+  /* بازگرداندن رفتار پیش‌فرض رنگ حاشیه‌ها (مانند نسخه اصلی) */
+  *,
+  ::before,
+  ::after {
+    border-color: #e2e8f0;
+  }
+}
+
+* {
+  font-family: var(--font-vazir);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f5f8fc;
+  color: #142033;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #1565a8;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #edf2f9;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#0b3a6e, #2f80c9);
+  border-radius: 99px;
+}
+
+/* --------------------------------------------------------------------------
+   انیمیشن‌ها و ابزارهای سفارشی (بدون هیچ تغییری نسبت به نسخه اصلی)
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-d1 {
+  transition-delay: 0.1s;
+}
+.reveal-d2 {
+  transition-delay: 0.2s;
+}
+.reveal-d3 {
+  transition-delay: 0.3s;
+}
+
+.hero-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.img-zoom {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .img-zoom {
+  transform: scale(1.08);
+}
+
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.btn-sheen:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.7s;
+}
+.btn-sheen:hover:after {
+  left: 130%;
+}
+
+/* ورود نرم هر صفحه در هنگام تغییر مسیر (معادل pageIn نسخه اصلی) */
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-page-in {
+  animation: pageIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tick {
+  font-variant-numeric: tabular-nums;
+}
+
+.gallery-main {
+  cursor: zoom-in;
+}
+
+input,
+select,
+textarea {
+  outline: none;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2f80c9 !important;
+  box-shadow: 0 0 0 4px rgba(47, 128, 201, 0.12);
+}
+
+.chip-active {
+  background: #0b3a6e !important;
+  color: #fff !important;
+  border-color: #0b3a6e !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  animation: marquee 28s linear infinite;
+  width: max-content;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(50%);
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+.floaty2 {
+  animation: floaty 7.5s ease-in-out infinite reverse;
+}
+
+.tick-box {
+  background: linear-gradient(180deg, #0b3a6e, #1565a8);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 8px 20px -6px rgba(11, 58, 110, 0.5);
+}
+
+.timeline-line {
+  background: linear-gradient(to bottom, #2f80c9, #0b3a6e);
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.accordion.open .accordion-body {
+  max-height: 500px;
+}
+.accordion.open .acc-icon {
+  transform: rotate(45deg);
+}
+.acc-icon {
+  transition: 0.3s;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: #cbd5e1;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.dot.active {
+  width: 28px;
+  background: #0b3a6e;
+}
+
+.swatch {
+  transition: 0.25s;
+  cursor: pointer;
+}
+.swatch.active {
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #0b3a6e;
+}
+
+.toast-in {
+  animation: toastIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes popCheck {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.pop-check {
+  animation: popCheck 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#zoomLens {
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .hero-h {
+    font-size: 2.15rem !important;
+    line-height: 1.25 !important;
+  }
+}
